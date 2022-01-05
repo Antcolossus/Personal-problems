@@ -1,0 +1,97 @@
+#https://www.cemc.uwaterloo.ca/contests/computing/2021/ccc/juniorEF.pdf
+
+#REPLACING VARIABLES IN A ARRAY
+'''M = [[1],[2],[3],[4]]
+del M[0][0]
+M[0].append(3)
+print(M)'''
+
+#MAKING SURE I DONT MAKE THE SAME MISTAKE LIKE IN THE TEST
+'''    
+N = [1,2,3,4]
+M = 4
+for i in range(M):
+    print(N[i])'''
+
+#GETTING THE DIGITS AFTER R or C
+'''move_input = 'R 333333333'
+print(int(move_input[2:]))'''
+
+#TESTING MAKING THE CANVAS AND PRINTING IT
+'''
+#VARIABLES
+canvas = []
+counter = 0
+counter2 = 0
+move_input = ''
+
+#INPUTS
+M = int(input()) #coloums
+N = int(input()) #rows
+
+#MAKING CANVAS
+for i in range(M):
+    canvas.append([])
+    for x in range(N):
+        canvas[i].append(['B'])
+
+#PRINTING RESULT
+print('\n') 
+for i in range(M):
+    for x in range(N):
+        if counter == M:
+            print('\n', end='')
+            counter = 0
+        print(canvas[i][x][0], end='')
+        counter = counter + 1
+print("\n")'''
+
+#--------FINAL ANSWER-------
+
+#INPUTS & VARIABlES
+canvas,counter,counter2,move_input = [],0,0,''
+M,N = int(input('\n')),int(input()) #coloums = M and rows = N
+
+#MAKING CANVAS
+for i in range(M):
+    canvas.append([])
+    for x in range(N):
+        canvas[i].append(['B'])
+
+#GETTING CHOICE INPUTS
+for i in range(int(input())):
+    move_input = input()
+    last_digit = int(move_input[2:])
+
+    #IF CHOICE IS 'R'
+    if move_input[:1] == 'R':
+        for y in range(N):
+            if canvas[last_digit-1][y][0] == 'B':
+                del canvas[last_digit-1][y][0]
+                canvas[last_digit-1][y].append('G')
+            else:
+                del canvas[last_digit-1][y][0]
+                canvas[last_digit-1][y].append('B')
+    
+    #IF CHOICE IS 'C'
+    elif move_input[:1] == 'C':
+        for w in range(M):
+            if canvas[w][last_digit-1][0] == 'B':
+                del canvas[w][last_digit-1][0]
+                canvas[w][last_digit-1].append('G')
+            else:
+                del canvas[w][last_digit-1][0]
+                canvas[w][last_digit-1].append('B')
+
+#PRINTING
+print("\n","-"*6, 'Result', "-"*6, '\n')
+for i in range(M):
+    for x in range(N):
+        if counter == N:
+            print('\n', end='')
+            counter = 0
+        print(canvas[i][x][0], end='')
+        counter = counter + 1
+print("\n")
+
+#--------END-------
