@@ -1,0 +1,77 @@
+Link: https://www.cemc.uwaterloo.ca/contests/computing/2018/stage%201/juniorEF.pdf
+
+#Question 1
+a = []
+for i in range(4):
+    inp = int(input())
+    a.append(inp)
+if a[0] == 8 or a[0] == 9 and a[3] == 8 or a[3] == 9 and a[1] == a[2]:
+    print("ignore")
+else:
+    print("answer")
+
+#Question 2
+a,b,c,d = int(input()),input(),input(),0
+for i in range(a):
+    if b[i] == 'C' and c[i] == 'C': d = d + 1
+print(d)
+
+#Question 3    
+inp = [3,10,12,5]
+line = [0]
+
+for i in range(0,4):
+    line.append(line[i] + inp[i])
+for i in range(0,5):
+    result = []
+    for j in range(0,5):
+        distance = line[j] - line[i]
+        if (distance<0):
+            distance = distance*-1
+        result.append(distance)
+    print(result)
+
+#question 4
+#Declaring variables
+import copy
+new,arr,a = [],[],int(input())
+
+#Making variables
+for i in range(a):
+    new.append([])
+    arr.append(list(map(int, input().split())))
+min = min(min(arr))
+
+while arr[a-1][a-1] != max(max(arr)):
+    arr2 = copy.deepcopy(new)
+    for k in range(a):
+        for z in range(a): arr2[k].append(arr[z][(k*-1)-1])
+    arr = copy.deepcopy(arr2)    
+
+#Printing
+print("\n")
+for c in arr:
+    for c1 in c:print(c1,end=' ')
+    print(' ')
+
+#question 5
+#variable
+arr,stack,visited,count_fin,count = [],[0,],[],[],0
+#Making data
+a = int(input())
+for i in range(a):
+    arr = arr + [list(map(int,input().split()))]
+    del arr[i][0]
+#Brains
+while stack != []:
+    pop = stack.pop(0)
+    visited.append(pop)
+    if arr[pop] == []: count_fin.append(count)
+    else:
+        for i in arr[pop]:
+            if i not in visited:
+                stack.append(i-1)
+                count = count + 1
+#Printing
+print('Y') if len(visited) == a else print('N')
+print(0) if count_fin == [] else print(count_fin[0])
